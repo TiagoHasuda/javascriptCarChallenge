@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+</head>
+<body>
+  <h1 data-js="enterprise"></h1><br>
+  <form data-js="inputForm">
+    <label>Imagem</label><br>
+    <input type="url" data-js="carUrl" placeholder="Imagem" /><br>
+    <label>Modelo</label><br>
+    <input type="text" data-js="model" placeholder="Modelo" /><br>
+    <label>Ano</label><br>
+    <input type="text" data-js="year" placeholder="Ano" /><br>
+    <label>Placa</label><br>
+    <input type="text" data-js="plate" placeholder="Placa" /><br>
+    <label>Cor</label><br>
+    <input type="text" data-js="color" placeholder="Cor" /><br>
+    <button>Cadastrar</button><br>
+  </form>
+
+  <table data-js="carTable">
+    <tr>
+      <th>Imagem</th>
+      <th>Modelo</th>
+      <th>Ano</th>
+      <th>Placa</th>
+      <th>Cor</th>
+    </tr>
+  </table>
+  
+  <script src="dom.js"></script>
+  <script src="29-javascript-tiago-grossi-hasuda.js"></script>
+</body>
+</html>
