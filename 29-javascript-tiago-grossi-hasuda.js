@@ -99,13 +99,25 @@
       newPlate.innerText = $plate.get().value;
       var newColor = doc.createElement('td');
       newColor.innerText = $color.get().value;
+      var newRemove = doc.createElement('td');
+      var newBtn = doc.createElement('button');
+      newBtn.textContent = 'Remover';
+      newBtn.addEventListener('click', removeCar, false);
+      newRemove.appendChild(newBtn);
+      
       newRow.appendChild(newImg);
       newRow.appendChild(newModel);
       newRow.appendChild(newYear);
       newRow.appendChild(newPlate);
       newRow.appendChild(newColor);
+      newRow.appendChild(newRemove);
       newCar.appendChild(newRow);
       return newCar;
+    }
+
+    function removeCar() {
+      var $car = this.parentNode.parentNode;
+      $carTable.get().removeChild($car);
     }
 
     initApp();
