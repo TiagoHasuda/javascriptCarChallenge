@@ -78,6 +78,7 @@
     var $form = DOM('[data-js=inputForm]');
     var postCar = new XMLHttpRequest();
     var getCars = new XMLHttpRequest();
+    var deleteCar = new XMLHttpRequest();
     var defaultTable = `<tr>
     <th>Imagem</th>
     <th>Modelo</th>
@@ -88,13 +89,14 @@
   </tr>`;
 
     function initApp() {
-      postCar.addEventListener('readystatechange', registerStateChange, false);
+      postCar.addEventListener('readystatechange', postStateChange, false);
       getCars.addEventListener('readystatechange', getStateChange, false);
+      deleteCar.addEventListener('readystatechange', deleteStateChange, false);
       listCars();
       return $form.get().addEventListener('submit', registerCar, false);
     }
 
-    function registerStateChange() {
+    function postStateChange() {
       if(isReady(postCar))
         return listCars();
       return false;
@@ -103,6 +105,12 @@
     function getStateChange() {
       if(isReady(getCars))
         return addToTable();
+      return false;
+    }
+
+    function deleteStateChange() {
+      if(isReady(deleteCar))
+        return listCars();
       return false;
     }
 
@@ -172,16 +180,23 @@
     }
 
     function removeCar() {
-      var $car = this.parentNode.parentNode;
-      $carTable.get().removeChild($car);
+      var $rmCar = this.parentNode.parentNode;
+      var $rmPlate = $rmCar.children[3].textContent;
+      funcDeleteCar($rmPlate);
+    }
+
+    function funcDeleteCar(_plate) {
+      deleteCar.open('DELETE', 'http://localhost:3000/car');
+      deleteCar.setRequestHeader(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      );
+      deleteCar.send(`plate=${_plate}`);
     }
 
     initApp();
-
-    return {
-      registerCar: registerCar
-    }
   }
 
-  win.app = app();
+  app();
+
 }(window.DOM, window, document));
